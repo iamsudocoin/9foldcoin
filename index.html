@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:7545 https://rinkeby.infura.io/AkYutwj8wHOBtpj8Y3SD https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css https://code.jquery.com/jquery-3.2.1.min.js  https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js 'unsafe-eval'; img-src * data:;">
+
+    <title>Hello</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="./app.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="mb-4">
+        <h2 class="title">The 9fold collectible's</h2>
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#create-account-modal">Create account</button>
+    </div>
+
+    <div id="bid-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="username-addon">Username</span>
+            </div>
+            <input name="username" type="text" class="form-control" placeholder="Your username"/>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">&#x1f511;</span>
+            </div>
+            <input name="pw" type="password" class="form-control" placeholder="Your password" />
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    eth
+                </span>
+            </div>
+            <input name="bid-amount" type="text" class="form-control" placeholder="Amount of ethereum (in ether)">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                   img url
+                </span>
+            </div>
+            <input name="img-url" type="text" class="form-control" placeholder="http:// (URL of image)">
+        </div>
+
+        <div>
+            <p class="float-right">Your balance: <span id="balance" class="text-info">-</span></p>
+            <div class="dropdown" class="float-left">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="collectible-choice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Choose a collectible
+                </button>
+                <div id="collectible-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Loading...</a>
+                </div>
+                <input id="collectible-name" type="hidden" value="" name="collectible-name" />
+            </div>
+        </div>
+
+        <div class="input-group mt-4">
+            <div class="mx-auto">
+
+                <button name="submit-bid" class="btn btn-primary" type="submit">Bid</button>
+                <div class="spinner mt-2 ml-3">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <h5>How it works</h5>
+        <p class="text-left">1. There are only a few collectibles. Your job is to acquire as many as you can.</p>
+        <p class="text-left">2. You can acquire a collectible by bidding higher than the previous person and you can set a cool image.</p>
+        <p class="text-left">3. If you bid higher than the other person, the previous owner gets your money.</p>
+        <p class="text-left">4. There is no time limit. Anyone can take the collectible from you at any time.</p>
+        <p class="text-left">5. Transparency: 3% of all bids go to the creator for the painful work of making the application.</p>
+    </div>
+
+    <div id="collectibles-list" class="collectibles mt-5">
+        <h3>Collectibles</h3>
+
+        <div id="cards" class="card mt-3">
+            <div class="card-body mx-auto">
+                <div class="card float-left mr-3 mb-3">
+                    <img class="card-img-top" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160b871c2a2%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160b871c2a2%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2299.4375%22%20y%3D%2296.3375%22%3ENo%20image%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Create account modal -->
+    <div class="modal fade" id="create-account-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Create your account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" name="username" class="form-control" placeholder="Your username" />
+            <input type="password" name="pw" class="form-control mt-3" placeholder="Your password" />
+            <label for="address" class="mt-3">Your ethereum address</label>
+            <input type="text" name="address" readonly class="form-control" id="address" data-toggle="popover" data-content="You'll need some ethereum first before you can create an account." data-placement="right" data-trigger="manual" />
+            <input id="pk" type="hidden" name="pk" />
+
+            <p class="mt-3">In order to create your account, you'll need some coins first. Go to <a href="https://faucet.rinkeby.io/" target="_blank">faucet.rinkeby.io</a> to get some <span class="font-weight-bold">free</span> coins using the address above.</p><p>Be patient: wait till your account shows it's <span class="text-success font-weight-bold">Funded</span> before clicking create account.</p>
+          </div>
+          <div class="modal-footer">
+            <div class="spinner float-left">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" name="create-account" >Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+<script src="./static/bundle.js"></script>
+</html>
