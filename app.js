@@ -157,6 +157,7 @@ class App {
                     //console.log(d[i]);
                     var obj = $($.parseHTML(html));
                     obj.find('.card-title').text(xss(d[i].collectible));
+
                     obj.find('p.card-text').text('Owner: ' + xss(d[i].username) + ' @ ' + parseFloat(w.utils.fromWei(xss(d[i].amount), 'ether')) + ' ether');
 
                     if (d[i].img_url) {
@@ -213,11 +214,11 @@ class App {
 
             var done = function() {
                 $('button[name="submit-bid"]').attr('disabled', false);
-                $('#bid-form .spinner').attr('disabled', true);
+                $('#bid-form .spinner').hide();
                 return that.load_collectibles();
             }
 
-            $('#bid-form .spinner').attr('disabled', false);
+            $('#bid-form .spinner').show();
 
             that.submit_bid()
             .then(d => {
