@@ -173,7 +173,7 @@ class App {
                             bid.img_url,
                             bid.amount,
                             'ether',
-                            90000*3
+                            90000*4
                         )
                     });
                 } else {
