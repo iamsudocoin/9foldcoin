@@ -87,6 +87,19 @@ if (options.deploy) {
     }
 }
 
+// Create collectible
+if (options.collectible && options.collectible.length > 0 && options.contract) {
+    console.log('Attempting to create collectible: ' + options.collectible);
+    globals.pk = options.pk;
+
+    var account = w.eth.accounts.privateKeyToAccount(globals.pk);
+    globals.from = account.address;
+
+    var api = new CollectibleAPI(globals.from, options.contract, config.abi);
+    api.pk = globals.pk;
+    api.createNewCollectible(options.collectible, 0, '', 90000*2).then(console.log);
+}
+
 // Send monies
 if (options['send-only'] && options.address && options.to) {
     w.eth.sendTransaction({from: options.address, to: options.to, value: w.utils.toWei(options.value, 'ether'), gas: 90000}).then(console.log);
